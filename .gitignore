@@ -21,3 +21,9 @@ data/processed/
 .idea/
 .DS_Store
 Thumbs.db
+# Local database backups
+*.dump
+*.bak
+
+# Generated analytics output
+output/
