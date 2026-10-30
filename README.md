@@ -1,75 +1,203 @@
-# NYC 311 Data Pipeline
+# NYC & Chicago 311 Data Engineering Pipeline
 
-A Python and PostgreSQL data pipeline that ingests NYC 311 service requests, stores raw source snapshots, transforms them into a reusable analytics schema, and exports SQL-based reports to CSV.
+An end-to-end data engineering project that ingests 311 service requests from New York City and Chicago, stores source data in PostgreSQL, transforms both datasets into a shared data model, and generates cross-city analytics reports exported as CSV files.
 
 ## Architecture
 
-- **Bronze:** Stores raw API payloads as JSONB, with source identifiers, update timestamps, and ingestion timestamps.
-- **Silver:** Transforms source fields into a common service-request schema designed to support additional cities in the future.
-- **Checkpoints:** Tracks ingestion progress to support resumable historical backfills.
-- **Analytics:** Runs SQL aggregations against Silver and exports results as CSV files.
-
-## Technology Stack
-
-- Python
-- PostgreSQL
-- Docker Compose
-- Requests
-- Psycopg
-- CSV / SQL analytics
-
-## Data Scope
-
-The current historical backfill covers NYC 311 requests created from January 1, 2026, through the latest available records retrieved during the October 2026 run.
-
-The Silver layer contains the latest available snapshot per NYC request ID from the ingested Bronze data.
-
-## Analytics Reports
-
-Run:
-
-```powershell
-python .\src\export_analytics.py
+```text
+       NYC Open Data API          Chicago Data Portal API
+               |                           |
+               v                           v
+       STAGE 1: NYC                STAGE 2: CHICAGO
+       Data Ingestion              Data Ingestion
+               |                           |
+               v                           v
+         NYC Bronze                 Chicago Bronze
+               |                           |
+               v                           v
+       NYC Bronze → Silver    Chicago Bronze → Silver
+               |                           |
+               +-------------+-------------+
+                             |
+                             v
+                    SHARED SILVER MODEL
+                  silver.service_requests
+                             |
+                             v
+                  STAGE 3: COMBINED PIPELINE
+                     Cross-City Analytics
+                             |
+                             v
+                       SQL Queries
+                             |
+                             v
+                       CSV Reports
 ```
 
-The script creates the `output/` directory and exports:
+The orchestrator (`src/run_pipeline.py`) executes the following stages:
 
-1. `monthly_complaint_trends.csv` — monthly complaint volume, closed-request counts, and closure rates.
-2. `complaints_by_borough_category.csv` — complaint counts grouped by borough and complaint category.
-3. `closure_time_by_agency_category.csv` — closed-request counts and average/median closure durations in hours, excluding missing or invalid closure timestamps.
+1. NYC incremental Bronze ingestion
+2. Chicago incremental Bronze ingestion
+3. NYC Bronze-to-Silver transformation
+4. Chicago Bronze-to-Silver transformation
+5. Cross-city analytics and CSV export
 
-Generated CSV files are local outputs and are excluded from Git.
+## Tech Stack
 
-## Local Setup
+- **Language:** Python
+- **Database:** PostgreSQL
+- **Database Access:** Psycopg
+- **Containerization:** Docker, Docker Compose
+- **Data Sources:** NYC Open Data API, Chicago Data Portal API
+- **Data Formats:** JSON, JSONB, CSV
+- **Query Language:** SQL
 
-1. Start PostgreSQL using Docker Compose:
+## Data Pipeline
 
-   ```powershell
-   docker compose up -d
-   ```
+### Bronze Layer
 
-2. Activate the virtual environment and install dependencies:
+- Stores raw API responses as JSONB.
+- Maintains source request IDs, update timestamps, and ingestion timestamps.
+- Preserves historical snapshots of updated service requests.
+- Uses separate source-specific tables for NYC and Chicago.
 
-   ```powershell
-   .\.venv\Scripts\Activate.ps1
-   pip install -r requirements.txt
-   ```
+### Silver Layer
 
-3. Configure `DATABASE_URL` if your PostgreSQL connection differs from the local default.
+- Transforms both source datasets into a shared PostgreSQL table: `silver.service_requests`.
+- Standardizes source-specific fields into a common schema.
+- Maintains one latest record per city and request ID.
+- Uses upserts to apply newer source updates.
 
-4. Run the ingestion and transformation scripts as needed, then export the reports:
+### Incremental Processing
 
-   ```powershell
-   python .\src\export_analytics.py
-   ```
+- Timestamp-based checkpoints for incremental API ingestion.
+- Keyset pagination for reliable API extraction.
+- Overlap windows to reduce the risk of missing updates.
+- Database constraints to prevent duplicate snapshots.
+- Incremental Bronze-to-Silver transformations.
+- Checkpoint-based recovery and idempotent pipeline reruns.
+- Fail-fast orchestration to prevent downstream stages from running after a failure.
 
-## Current Validation
+## Cross-City Analytics
 
-The 2026 Silver dataset contains 3,280,620 requests. The monthly report totals match that count. The generated reports contain 10 monthly rows, 961 borough/category groups, and 196 agency/category closure-time groups.
+SQL analytics queries run against the shared Silver model and export results to CSV files under `output/cross_city_analytics/`.
 
-## Future Improvements
+| CSV Report                        | Analysis                                                 |
+| --------------------------------- | -------------------------------------------------------- |
+| `cross_city_top_categories.csv`   | Top request categories by city                           |
+| `cross_city_monthly_trends.csv`   | Monthly request volume by city                           |
+| `cross_city_closure_rates.csv`    | Open and closed requests and closure rates               |
+| `cross_city_resolution_times.csv` | Average and median resolution times by city and category |
+| `cross_city_weekday_patterns.csv` | Request volume by weekday and city                       |
 
-- Incremental ingestion for newly created and updated requests.
-- Automated tests for transformations and analytics.
-- Additional city adapters using the common Silver schema.
-- Scheduled pipeline execution and operational monitoring.
+The project also generates three NYC-specific analytics reports:
+
+- `monthly_complaint_trends.csv`
+- `complaints_by_borough_category.csv`
+- `closure_time_by_agency_category.csv`
+
+All analytics query results are saved as CSV files for further analysis.
+
+## Data Validation
+
+Successful pipeline validation produced the following Silver-table results:
+
+| City      | Unique Requests |
+| --------- | --------------: |
+| NYC       |       3,627,407 |
+| Chicago   |       1,797,332 |
+| **Total** |   **5,424,739** |
+
+Validation confirmed:
+
+- One Silver record per unique source request ID in each city.
+- No missing request IDs.
+- No missing creation timestamps.
+- No missing categories.
+
+## Project Structure
+
+```text
+retail-data-pipeline/
+│
+├── src/
+│   ├── run_pipeline.py
+│   ├── incremental_ingest_nyc.py
+│   ├── ingest_chicago_bronze.py
+│   ├── transform_bronze_to_silver.py
+│   ├── transform_chicago_to_silver.py
+│   ├── export_analytics.py
+│   └── export_cross_city_analytics.py
+│
+├── sql/
+├── data/
+├── output/
+│   ├── cross_city_analytics/
+│   └── NYC analytics CSV reports
+│
+├── docker-compose.yml
+├── requirements.txt
+├── .env.example
+└── README.md
+```
+
+## Setup & Execution
+
+### Prerequisites
+
+- Python 3.10+
+- Docker Desktop with Docker Compose
+- Git
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/sebastianmichael94/nyc-311-data-engineering.git
+cd nyc-311-data-engineering
+```
+
+### 2. Create and activate a virtual environment
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Start PostgreSQL
+
+```bash
+docker compose up -d
+```
+
+Configure the database connection using the `DATABASE_URL` environment variable:
+
+```powershell
+$env:DATABASE_URL = "postgresql://pipeline_user:<your-password>@localhost:5433/nyc_311"
+```
+
+### 5. Run the complete pipeline
+
+```powershell
+python src/run_pipeline.py
+```
+
+### 6. Run cross-city analytics independently
+
+```powershell
+python src/export_cross_city_analytics.py
+```
+
+Generated CSV reports are saved under `output/cross_city_analytics/`.
+
+## Data Sources
+
+- [NYC 311 Service Requests](https://data.cityofnewyork.us/resource/erm2-nwe9.json)
+- [Chicago 311 Service Requests](https://data.cityofchicago.org/resource/v6vf-nfxy.json)
+
+**Note:** NYC and Chicago use different source category taxonomies. Category comparisons are descriptive and do not imply that categories are directly equivalent across cities. Closure rates reflect the current state recorded in the source data.

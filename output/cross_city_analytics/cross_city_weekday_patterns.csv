@@ -1,0 +1,15 @@
+﻿source_city,weekday_number,weekday,total_requests,closed_requests
+Chicago,1,Monday,285549,264735
+NYC,1,Monday,559077,529871
+Chicago,2,Tuesday,279555,260462
+NYC,2,Tuesday,564542,534073
+Chicago,3,Wednesday,277844,259098
+NYC,3,Wednesday,533746,502447
+Chicago,4,Thursday,283208,264208
+NYC,4,Thursday,519617,494432
+Chicago,5,Friday,270118,254477
+NYC,5,Friday,523408,499316
+Chicago,6,Saturday,195760,187537
+NYC,6,Saturday,459390,440839
+Chicago,7,Sunday,205298,196735
+NYC,7,Sunday,467627,449367

@@ -1,0 +1,261 @@
+﻿source_city,category,closed_requests,avg_resolution_hours,median_resolution_hours
+Chicago,311 INFORMATION ONLY CALL,535575,0.00,0.00
+NYC,Abandoned Bike,1856,84.36,55.92
+NYC,Abandoned Vehicle,62291,4.07,2.33
+Chicago,Abandoned Vehicle Complaint,43223,381.29,276.33
+NYC,AHV Inspection Unit,141,220.21,86.89
+Chicago,Aircraft Noise Complaint,389114,0.00,0.00
+NYC,Air Quality,8098,75.09,47.08
+Chicago,Alley Light Out Complaint,4622,368.14,144.11
+Chicago,Alley Pothole Complaint,8250,991.24,496.90
+Chicago,Alley Sewer Inspection Request,1183,1018.08,477.58
+NYC,Animal-Abuse,9720,3.48,1.88
+NYC,Animal Facility - No Permit,71,254.84,271.04
+NYC,Animal in a Park,4780,99.99,1.42
+Chicago,Animal In Trap Complaint,156,14.76,3.85
+NYC,APPLIANCE,28551,618.50,351.25
+NYC,Asbestos,1190,142.42,19.62
+NYC,Beach/Pool/Sauna Complaint,227,216.06,98.76
+Chicago,Bee/Wasp Removal,820,166.56,116.71
+NYC,Bench,129,268.64,77.06
+NYC,BEST/Site Safety,447,164.92,10.96
+Chicago,Bicycle Request/Complaint,272,295.88,145.08
+NYC,Bike Rack,568,681.23,237.95
+NYC,Bike/Roller/Skate,1853,3.04,1.61
+NYC,Blocked Driveway,162312,3.04,1.67
+Chicago,Blue Recycling Cart,17962,837.13,842.24
+NYC,Boilers,2855,847.16,823.61
+NYC,Bridge Condition,427,727.62,404.48
+NYC,Broken Parking Meter,2304,232.83,158.68
+NYC,Building Drinking Water Tank,31,335.34,137.84
+Chicago,Buildings - Plumbing Violation,7151,870.29,813.10
+NYC,Building/Use,22539,1101.52,708.50
+Chicago,Building Violation,16106,749.77,309.91
+Chicago,Bungalow/Vintage Home Information Request,83,166.43,167.64
+Chicago,Business Complaints,2668,398.71,248.90
+NYC,Bus Stop Shelter Complaint,1770,169.63,121.37
+NYC,Bus Stop Shelter Placement,266,65.71,20.02
+Chicago,Cab Feedback,3004,1040.07,1190.54
+Chicago,Cable TV Complaint,166,570.81,567.62
+NYC,Cannabis Retailer,2981,1147.60,1082.85
+Chicago,Check for Leak,9063,243.40,30.09
+Chicago,City Vehicle Sticker Violation,3873,168.84,88.99
+Chicago,Clean and Green Program Request,203,1857.31,1700.72
+Chicago,Clean Vacant Lot Request,4395,389.32,124.95
+NYC,Commercial Disposal Complaint,1333,31.72,0.46
+Chicago,Commercial Fire Safety Inspection Request,367,400.30,295.24
+NYC,Consumer Complaint,16786,473.78,545.67
+Chicago,Consumer Fraud Complaint,904,1302.65,964.52
+Chicago,Consumer Retail Business Complaint,525,537.90,313.27
+NYC,Cooling Tower,62,521.14,411.91
+Chicago,Coyote Interaction Complaint,1804,52.47,32.98
+NYC,Cranes and Derricks,59,8.83,0.00
+NYC,Curb Condition,6955,497.25,387.51
+NYC,Damaged Tree,31589,301.90,66.77
+NYC,Day Care,1474,30.01,24.25
+NYC,Dead Animal,9515,51.89,42.80
+Chicago,Dead Animal Pick-Up Request,15533,74.17,50.88
+Chicago,Dead Bird,1041,118.66,95.95
+NYC,Dead/Dying Tree,6515,803.97,381.98
+NYC,Derelict Vehicles,30154,34.91,21.17
+NYC,Dirty Condition,59713,53.01,30.57
+NYC,Disorderly Youth,174,3.64,2.11
+Chicago,Divvy Bike Parking Complaint,7920,2.60,1.53
+NYC,DOOR/WINDOW,58648,537.29,296.06
+NYC,Drinking,3944,2.71,1.41
+NYC,Drinking Water,267,156.97,136.90
+NYC,Drug Activity,7760,2.23,1.10
+NYC,Dumpster Complaint,1902,67.13,48.89
+NYC,ELECTRIC,39807,452.92,180.73
+NYC,Electrical,2062,149.89,109.17
+NYC,Elevator,21885,428.96,101.81
+NYC,ELEVATOR,2402,583.64,306.64
+NYC,Emergency Response Team (ERT),3044,373.20,192.90
+NYC,Encampment,38211,52.36,2.06
+NYC,E-Scooter,386,43.33,24.25
+Chicago,E-Scooter Parking Complaint,10503,69.44,1.74
+NYC,Ferry Complaint,182,76.33,50.61
+NYC,Ferry Inquiry,338,86.40,73.88
+Chicago,Finance Parking Code Enforcement Review,20282,0.00,0.00
+NYC,FLOORING/STAIRS,34652,499.07,269.20
+Chicago,Fly Dumping Complaint,15990,340.78,111.52
+NYC,Food Establishment,9802,1345.82,1440.25
+NYC,Food Poisoning,2518,396.35,91.99
+NYC,For Hire Vehicle Complaint,3789,1637.43,547.26
+NYC,For Hire Vehicle Report,32,3000.21,2844.41
+Chicago,Garbage Cart Maintenance,38606,754.66,695.63
+NYC,GENERAL,47287,564.57,310.03
+NYC,General Construction/Plumbing,35001,384.10,40.30
+NYC,Graffiti,12537,427.27,217.78
+Chicago,Graffiti Removal Request,79985,25.13,12.80
+NYC,Green Infrastructure,205,531.71,527.41
+NYC,Green Taxi Complaint,307,282.96,60.86
+NYC,Harboring Bees/Wasps,55,69.19,54.92
+NYC,Hazardous Material,619,79.78,2.72
+NYC,Hazardous Materials,1208,64.25,2.62
+NYC,HEAT/HOT WATER,371613,46.33,41.82
+NYC,Highway Condition,5828,230.23,86.05
+NYC,Highway Sign - Damaged,54,311.42,144.46
+NYC,Highway Sign - Missing,38,279.68,198.26
+Chicago,Home Buyer Program Info Request,50,178.70,191.36
+NYC,Homeless Person Assistance,29785,13.54,5.48
+Chicago,Ice and Snow Removal Request,3385,7.34,4.35
+NYC,Illegal Animal Kept as Pet,312,196.86,188.35
+NYC,Illegal Animal Sold,81,236.70,244.17
+NYC,Illegal Dumping,32337,76.69,52.92
+NYC,Illegal Fireworks,10675,1.87,0.91
+NYC,Illegal Parking,521963,2.93,1.53
+NYC,Illegal Posting,4543,84.36,65.90
+NYC,Illegal Tree Damage,4227,586.50,191.66
+Chicago,Inaccurate Fuel Pump Complaint,81,700.29,676.08
+NYC,Indoor Air Quality,9202,46.54,35.60
+NYC,Indoor Sewage,569,305.60,237.40
+NYC,Industrial Waste,998,23.49,4.93
+Chicago,Inspect Public Way Request,11167,212.56,28.09
+NYC,Institution Disposal Complaint,33,151.99,76.35
+NYC,Investigations and Discipline (IAD),589,405.28,195.10
+NYC,Lead,10925,110.87,38.23
+Chicago,Lead Inspection Request,213,73.51,47.30
+NYC,LinkNYC,212,416.57,357.50
+NYC,Litter Basket Complaint,1338,65.26,47.34
+NYC,Litter Basket Request,3529,80.35,55.81
+NYC,Lost Property,5550,58.37,51.33
+NYC,Lot Condition,73,130.24,50.23
+Chicago,Low Water Pressure Complaint,1644,199.27,26.31
+NYC,Maintenance or Facility,20809,571.63,256.61
+NYC,Missed Collection,29748,58.94,48.15
+Chicago,Missed Garbage Pick-Up Complaint,8302,109.22,53.33
+NYC,Mobile Food Vendor,1764,1440.38,1440.28
+NYC,Mold,322,43.09,38.83
+NYC,Mosquitoes,632,0.33,0.33
+NYC,Municipal Parking Facility,71,224.07,86.68
+NYC,New Tree Request,75,196.50,113.68
+Chicago,No Air Conditioning,513,21.58,16.17
+Chicago,No Building Permit and Construction Violation,1949,1198.43,788.46
+NYC,Noise,51222,112.12,68.80
+NYC,Noise - Commercial,51178,1.96,0.99
+NYC,Noise - Helicopter,239,9241.52,9240.55
+NYC,Noise - House of Worship,2190,1.24,0.50
+NYC,Noise - Park,7466,2.29,1.09
+NYC,Noise - Residential,312679,2.54,1.24
+NYC,Noise - Street/Sidewalk,158886,2.40,1.15
+NYC,Noise - Vehicle,45575,2.08,1.00
+NYC,Non-Emergency Police Matter,19950,2.73,1.37
+NYC,Non-Residential Heat,1109,1345.34,1441.09
+Chicago,No Solicitation Complaint,71,1277.75,998.45
+Chicago,No Water Complaint,4059,33.70,2.00
+Chicago,Nuisance Animal Complaint,4244,299.60,84.94
+NYC,Obstruction,18954,61.09,32.99
+Chicago,Open Fire Hydrant Complaint,4960,69.40,5.50
+Chicago,Outdated Merchandise Complaint,88,393.81,204.16
+NYC,Outdoor Dining,2336,417.98,257.70
+NYC,OUTSIDE BUILDING,1310,624.11,348.92
+NYC,Overgrown Tree/Branches,6516,708.25,189.65
+Chicago,Paid Sick Leave Violation,97,910.27,883.03
+NYC,PAINT/PLASTER,77504,404.80,190.25
+NYC,Panhandling,9923,2.20,0.82
+NYC,Pet Sale,129,223.38,206.30
+Chicago,Pet Wellness Check Request,2629,761.38,160.41
+NYC,Plant,123,2.79,1.58
+NYC,Plumbing,3381,666.39,295.49
+NYC,PLUMBING,91787,460.35,196.41
+NYC,Poison Ivy,142,1259.30,1440.11
+Chicago,Porch Inspection Request,464,206.84,141.76
+NYC,Posting Advertisement,105,2.66,1.51
+Chicago,Pothole in Street Complaint,49329,608.05,238.84
+Chicago,Protected Bike Lane - Debris Removal,471,3060.88,3023.51
+NYC,Public Toilet,60,69.68,30.59
+Chicago,Public Vehicle Complaint,296,409.26,114.77
+Chicago,Pushcart Food Vendor Complaint,197,184.07,21.05
+NYC,Real Time Enforcement,5424,78.83,7.40
+NYC,Recycling Basket Complaint,82,62.48,51.25
+Chicago,Recycling Inspection Request,212,573.01,159.24
+Chicago,Recycling Pick Up,5148,70.33,26.76
+Chicago,Renters and Foreclosure Complaint,32,598.82,525.49
+Chicago,Report an Injured Animal,7623,17.31,15.16
+NYC,Residential Disposal Complaint,11592,69.67,37.70
+Chicago,Restaurant Complaint,3423,365.57,160.28
+Chicago,Ridesharing Complaint,179,1029.99,1145.43
+NYC,Rodent,20849,282.18,156.69
+Chicago,Rodent Baiting/Rat Complaint,38018,147.38,107.06
+NYC,Root/Sewer/Sidewalk Condition,558,1533.31,1037.97
+NYC,SAFETY,16421,399.29,192.31
+Chicago,Sanitation Code Violation,14127,267.58,76.68
+NYC,Sanitation Worker or Vehicle Complaint,2767,113.08,81.41
+NYC,Scaffold Safety,126,17.33,9.21
+NYC,School Maintenance,666,107.34,23.96
+NYC,Sewer,17381,46.04,4.95
+Chicago,Sewer Cave-In Inspection Request,3891,863.54,382.42
+Chicago,Sewer Cleaning Inspection Request,7941,762.85,242.00
+NYC,Sewer Maintenance,11141,102.68,12.04
+Chicago,Shared Cost Sidewalk Program Request,87,15210.05,15724.31
+Chicago,Shared Housing/Vacation Rental Complaint,391,542.49,192.24
+Chicago,Sidewalk Café/Outdoor Dining Complaint,491,308.38,209.59
+NYC,Sidewalk Condition,21623,277.23,188.35
+Chicago,Sidewalk Inspection Request,995,4012.74,4199.29
+Chicago,Sign Repair Request - All Other Signs,5990,2728.55,2589.76
+Chicago,Sign Repair Request - Do Not Enter Sign,636,11.69,4.02
+Chicago,Sign Repair Request - One Way Sign,1909,6.43,0.05
+Chicago,Sign Repair Request - Stop Sign,4344,9.33,2.34
+NYC,Smoking or Vaping,5835,1100.97,1376.16
+Chicago,Snow - Object/Dibs Removal Request,1588,91.41,41.51
+NYC,Snow or Ice,55122,76.53,54.11
+Chicago,Snow Removal - Protected Bike Lane or Bridge Sidewalk,90,1499.48,1489.45
+Chicago,Snow – Uncleared Sidewalk Complaint,2857,254.29,171.41
+NYC,Special Natural Area District (SNAD),37,903.01,238.03
+NYC,Special Operations,36,400.09,147.94
+NYC,Special Projects Inspection Team (SPIT),3414,934.30,263.29
+NYC,Standing Water,1583,1329.18,1127.59
+Chicago,Stray Animal Complaint,9441,244.26,91.58
+Chicago,Street Cleaning Request,3592,143.55,46.93
+NYC,Street Condition,105342,120.85,36.21
+NYC,Street Light Condition,25408,486.87,239.07
+Chicago,Street Light On During Day Complaint,705,88.66,24.94
+Chicago,Street Light Out Complaint,29994,181.45,63.40
+Chicago,Street Light Pole Damage Complaint,3865,135.91,5.25
+Chicago,Street Light Pole Door Missing Complaint,441,1693.89,1209.29
+NYC,Street Sign - Damaged,4169,311.93,100.93
+NYC,Street Sign - Dangling,3254,219.34,135.98
+NYC,Street Sign - Missing,2639,458.22,99.22
+NYC,Street Sweeping Complaint,6825,77.96,53.35
+NYC,Tattooing,151,1440.40,1440.29
+NYC,Taxi Complaint,1003,3302.67,2922.83
+NYC,Taxi Compliment,73,1237.02,1032.51
+Chicago,Tobacco - General Complaint,137,440.48,335.09
+Chicago,Tobacco - Sale to Minors Complaint,105,348.91,260.11
+NYC,Traffic,9324,1.73,0.67
+NYC,Traffic Signal Condition,52644,281.39,2.63
+Chicago,Traffic Signal Out Complaint,23488,88.40,3.36
+Chicago,Tree Debris Clean-Up Request,38256,297.43,146.30
+Chicago,Tree Emergency,43297,95.13,31.85
+Chicago,Tree Planting Request,2162,2206.57,1623.31
+Chicago,Tree Removal Inspection,3068,1016.92,568.50
+Chicago,Tree Trim Request (NO LONGER BEING ACCEPTED),31325,0.00,0.00
+NYC,Unleashed Dog,1097,192.54,195.83
+NYC,Unsanitary Animal Facility,37,164.95,170.70
+NYC,Unsanitary Animal Pvt Property,2536,270.85,145.62
+NYC,UNSANITARY CONDITION,154585,488.10,265.13
+NYC,Unsanitary Pigeon Condition,1458,273.70,135.11
+NYC,Uprooted Stump,141,751.55,104.39
+NYC,Urinating in Public,1481,2.53,1.36
+Chicago,Vacant/Abandoned Building Complaint,4123,701.56,561.30
+NYC,Vendor Enforcement,20263,0.33,0.33
+Chicago,Viaduct Light Out Complaint,205,2185.60,1851.04
+Chicago,Vicious Animal Complaint,3962,23.39,16.48
+NYC,Violation of Park Rules,4284,18.55,0.91
+Chicago,Wage Complaint,244,992.16,821.22
+NYC,Waste Water Treatment Plant,94,6.71,1.56
+NYC,Water Conservation,6025,33.94,14.78
+Chicago,Water in Basement Complaint,7229,71.57,9.76
+Chicago,Water Lead Test Kit Request,4038,1745.77,1530.47
+Chicago,Water Lead Test Visit Request,1234,1479.13,1178.64
+NYC,WATER LEAK,53757,518.99,263.64
+NYC,Water Maintenance,20402,147.98,7.43
+Chicago,Water On Street Complaint,14837,389.45,34.54
+NYC,Water Quality,1003,387.14,92.77
+Chicago,Water Quality Concern,505,265.32,46.68
+NYC,Water System,55697,94.34,1.63
+Chicago,Weed Removal Request,8253,179.88,68.49
+Chicago,Wire Basket Request,1337,125.65,42.57
+NYC,Wood Pile Remaining,1311,315.08,95.64
+Chicago,Yard Waste Pick-Up Request,15818,96.91,41.98

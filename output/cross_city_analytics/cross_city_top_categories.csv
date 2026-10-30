@@ -1,0 +1,21 @@
+﻿source_city,category_rank,category,total_requests,closed_requests
+Chicago,1,311 INFORMATION ONLY CALL,535575,535575
+Chicago,2,Aircraft Noise Complaint,389114,389114
+Chicago,3,Graffiti Removal Request,80924,79985
+Chicago,4,Pothole in Street Complaint,57365,49329
+Chicago,5,Garbage Cart Maintenance,46795,38606
+Chicago,6,Abandoned Vehicle Complaint,45206,43223
+Chicago,7,Tree Emergency,44235,43297
+Chicago,8,Tree Debris Clean-Up Request,42540,38256
+Chicago,9,Rodent Baiting/Rat Complaint,39555,38018
+Chicago,10,Tree Trim Request (NO LONGER BEING ACCEPTED),31325,31325
+NYC,1,Illegal Parking,522235,521963
+NYC,2,HEAT/HOT WATER,387471,371613
+NYC,3,Noise - Residential,312874,312679
+NYC,4,UNSANITARY CONDITION,164561,154585
+NYC,5,Blocked Driveway,162411,162312
+NYC,6,Noise - Street/Sidewalk,159035,158886
+NYC,7,Street Condition,113842,105354
+NYC,8,PLUMBING,97387,91787
+NYC,9,PAINT/PLASTER,80791,77504
+NYC,10,DOOR/WINDOW,62380,58648
