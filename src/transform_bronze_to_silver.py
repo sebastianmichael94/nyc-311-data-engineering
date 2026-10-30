@@ -10,6 +10,7 @@ DATABASE_URL = os.getenv(
 )
 
 BATCH_SIZE = 1000
+CHECKPOINT_NAME = "silver_transform_raw_id"
 
 logging.basicConfig(
     level=logging.INFO,
@@ -58,7 +59,6 @@ def parse_float(value):
 
 
 def transform_record(city: str, payload: dict) -> dict | None:
-    """Map an NYC raw payload into the common Silver schema."""
     request_id = payload.get("unique_key")
     created_at = payload.get("created_date")
     category = payload.get("complaint_type")
@@ -89,51 +89,160 @@ def main():
     transformed_count = 0
     rejected_count = 0
 
-    # One transaction: a failure rolls back this transformation run.
     with psycopg.connect(DATABASE_URL) as connection:
-        with connection.cursor(name="latest_bronze_snapshots") as read_cursor:
-            read_cursor.execute(
+        with connection.cursor() as cursor:
+            # Read the previous transformation watermark.
+            cursor.execute(
                 """
-                SELECT DISTINCT ON (source_city, source_request_id)
-                    source_city,
-                    raw_payload
+                SELECT checkpoint_value
+                FROM ops.ingestion_checkpoints
+                WHERE source_city = 'NYC'
+                  AND checkpoint_name = %s
+                """,
+                (CHECKPOINT_NAME,),
+            )
+            result = cursor.fetchone()
+
+            if result is None:
+                raise RuntimeError(
+                    "Transformation checkpoint missing. "
+                    "Initialize it before running."
+                )
+
+            last_id = int(result[0])
+
+            # Capture a stable upper bound for this run.
+            cursor.execute("""
+                SELECT COALESCE(MAX(raw_record_id), 0)
                 FROM bronze.service_requests_raw
                 WHERE source_city = 'NYC'
-                ORDER BY
-                    source_city,
-                    source_request_id,
-                    source_updated_at DESC NULLS LAST,
-                    raw_record_id DESC
-                """
+            """)
+            upper_id = cursor.fetchone()[0]
+
+            if upper_id <= last_id:
+                print("No new Bronze records to transform.")
+                return
+
+            logger.info(
+                "Transforming Bronze IDs %s through %s",
+                last_id + 1,
+                upper_id,
             )
 
-            with connection.cursor() as write_cursor:
-                while True:
-                    batch = read_cursor.fetchmany(BATCH_SIZE)
-                    if not batch:
-                        break
+            # Identify distinct requests touched since the last run.
+            cursor.execute("""
+                CREATE TEMP TABLE changed_requests (
+                    source_city TEXT NOT NULL,
+                    source_request_id TEXT NOT NULL,
+                    PRIMARY KEY (source_city, source_request_id)
+                ) ON COMMIT DROP
+            """)
 
-                    rows = []
-                    records_read += len(batch)
+            cursor.execute(
+                """
+                INSERT INTO changed_requests
+                SELECT DISTINCT source_city, source_request_id
+                FROM bronze.service_requests_raw
+                WHERE source_city = 'NYC'
+                  AND raw_record_id > %s
+                  AND raw_record_id <= %s
+                ON CONFLICT DO NOTHING
+                """,
+                (last_id, upper_id),
+            )
 
-                    for city, payload in batch:
-                        row = transform_record(city, payload)
-                        if row is None:
-                            rejected_count += 1
-                        else:
-                            rows.append(row)
+            cursor.execute("SELECT COUNT(*) FROM changed_requests")
+            affected_count = cursor.fetchone()[0]
 
-                    if rows:
-                        write_cursor.executemany(UPSERT_SQL, rows)
-                        transformed_count += len(rows)
+            logger.info("Distinct affected requests: %s", affected_count)
 
-                    logger.info(
-                        "Latest snapshots read=%s; transformed=%s; rejected=%s",
-                        records_read,
-                        transformed_count,
-                        rejected_count,
+            
+            # Process affected requests in batches using keyset pagination.
+            
+            # Process affected requests in batches using keyset pagination.
+            last_request_id = ""
+
+            while True:
+                cursor.execute(
+                    """
+                    SELECT source_request_id
+                    FROM changed_requests
+                    WHERE source_request_id > %s
+                    ORDER BY source_request_id
+                    LIMIT %s
+                    """,
+                    (last_request_id, BATCH_SIZE),
+                )
+
+                request_ids = [
+                    row[0] for row in cursor.fetchall()
+                ]
+
+                if not request_ids:
+                    break
+
+                last_request_id = request_ids[-1]
+
+                # Retrieve the latest historical snapshot for each request.
+                cursor.execute(
+                    """
+                    SELECT DISTINCT ON (
+                        b.source_city, b.source_request_id
                     )
+                        b.source_city,
+                        b.raw_payload
+                    FROM bronze.service_requests_raw b
+                    WHERE b.source_city = 'NYC'
+                      AND b.source_request_id = ANY(%s)
+                    ORDER BY
+                        b.source_city,
+                        b.source_request_id,
+                        b.source_updated_at DESC NULLS LAST,
+                        b.raw_record_id DESC
+                    """,
+                    (request_ids,),
+                )
 
+                latest_records = cursor.fetchall()
+                records_read += len(latest_records)
+
+                rows = []
+
+                for city, payload in latest_records:
+                    row = transform_record(city, payload)
+
+                    if row is None:
+                        rejected_count += 1
+                    else:
+                        rows.append(row)
+
+                if rows:
+                    cursor.executemany(UPSERT_SQL, rows)
+                    transformed_count += len(rows)
+
+                logger.info(
+                    "Affected requests processed: %s/%s",
+                    records_read,
+                    affected_count,
+                )
+
+
+            # Advance the checkpoint in the same transaction as the upserts.
+            cursor.execute(
+                """
+                UPDATE ops.ingestion_checkpoints
+                SET checkpoint_value = %s,
+                    updated_at = NOW()
+                WHERE source_city = 'NYC'
+                  AND checkpoint_name = %s
+                """,
+                (str(upper_id), CHECKPOINT_NAME),
+            )
+
+        # Connection context commits only if everything succeeds.
+
+    print(f"Upper watermark: {upper_id}")
+    print(f"Distinct affected requests: {affected_count}")
     print(f"Latest snapshots read: {records_read}")
     print(f"Records transformed/upserted: {transformed_count}")
     print(f"Records skipped: {rejected_count}")
